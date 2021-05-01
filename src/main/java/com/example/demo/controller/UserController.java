@@ -3,9 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,8 +20,8 @@ public class UserController {
     UserService userService;
 
     @GetMapping("")
-    public List<User> list() {
-        return userService.listAllUser();
+    public Page<User> list(Pageable page) {
+        return userService.listAllUser(page);
     }
 
     @GetMapping("/{id}")
